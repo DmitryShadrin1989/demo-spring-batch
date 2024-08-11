@@ -1,0 +1,48 @@
+spring:
+
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: always
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27018
+      database: libraryMongo
+
+  datasource:
+    url: jdbc:postgresql://localhost:15432/libraryPostgres
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+      data-locations: data.sql
+      schema-locations: schema.sql
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+
+    show-sql: false
+
+    properties:
+      hibernate:
+        format_sql: true
+
+mongock:
+  runner-type: "InitializingBean"
+  change-logs-scan-package:
+    - ru.sm.lab.demo.mongodb.changelogs
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
+
+app:
+  comment-init-file: commentInit.csv
